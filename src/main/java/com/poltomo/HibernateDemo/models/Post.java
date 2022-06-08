@@ -1,5 +1,9 @@
 package com.poltomo.HibernateDemo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -8,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id"
+)
 public class Post {
 	
 	@Id
@@ -40,6 +48,7 @@ public class Post {
 	public void setPostdate(LocalDateTime postdate) {
 		this.postdate = postdate;
 	}
+	//@JsonBackReference
 	public User getUser() {
 		return user;
 	}

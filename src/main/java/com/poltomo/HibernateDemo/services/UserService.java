@@ -21,4 +21,9 @@ public class UserService {
     public Optional<User> findById(Integer id) {
         return userRepository.findById(id);
     }
+
+    //JPARepository
+    public List<User> getUsersByLocation(Integer id) {
+        return userRepository.findByLocationId(id);
+    }
 }

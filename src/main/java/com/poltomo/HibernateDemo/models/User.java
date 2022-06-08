@@ -1,5 +1,8 @@
 package com.poltomo.HibernateDemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,7 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 @Entity
-// @javax.persistence.Table(name="\"user\"")
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id"
+)
 @Table(name="users")
 public class User {
 	
@@ -27,7 +33,7 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
-	
+
 	public User() {}
 	public User(Integer id, String firstname, String lastname, Location location, String email) {
 		super();
@@ -55,6 +61,7 @@ public class User {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	//@JsonBackReference
 	public Location getLocation() {
 		return location;
 	}
@@ -66,5 +73,12 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	//@JsonManagedReference
+	public List<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 }
