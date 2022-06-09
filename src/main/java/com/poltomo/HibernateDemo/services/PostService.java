@@ -20,4 +20,13 @@ public class PostService {
     public Optional<Post> findById(Integer id) {
         return postRepository.findById(id);
     }
+
+    //JPARepository
+    public List<Post> getPostsByUser(Integer id) {
+        return postRepository.findByUserId(id);
+    }
+
+    public void addPost(Post post) {
+        postRepository.save(post);
+    }
 }

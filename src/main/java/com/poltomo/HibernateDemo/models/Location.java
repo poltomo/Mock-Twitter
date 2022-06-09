@@ -1,8 +1,6 @@
 package com.poltomo.HibernateDemo.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
 
@@ -11,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "id"
-)
 public class Location {
 	
 	@Id
@@ -42,7 +36,7 @@ public class Location {
 	public void setName(String name) {
 		this.name = name;
 	}
-	//@JsonManagedReference
+	@JsonManagedReference
 	public List<User> getUsers() {
 		return users;
 	}

@@ -1,7 +1,7 @@
 package com.poltomo.HibernateDemo.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
@@ -13,10 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 @Entity
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "id"
-)
 @Table(name="users")
 public class User {
 	
@@ -25,11 +21,20 @@ public class User {
 	
 	private String firstname;
 	private String lastname;
+
+	private String email;
+	private Integer locationid;
+
+	public Integer getLocationid() {
+		return locationid;
+	}
+	public void setLocationid(Integer locationid) {
+		this.locationid = locationid;
+	}
 	
 	@ManyToOne
-	@JoinColumn(name="location_id")
+	@JoinColumn(name="locationid", insertable = false, updatable = false)
 	private Location location;
-	private String email;
 	
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
@@ -61,20 +66,20 @@ public class User {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	//@JsonBackReference
-	public Location getLocation() {
-		return location;
-	}
-	public void setLocation(Location location) {
-		this.location = location;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	//@JsonManagedReference
+	@JsonBackReference
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	@JsonManagedReference
 	public List<Post> getPosts() {
 		return posts;
 	}

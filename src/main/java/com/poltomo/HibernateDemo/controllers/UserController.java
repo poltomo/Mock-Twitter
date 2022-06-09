@@ -4,9 +4,7 @@ import com.poltomo.HibernateDemo.models.Post;
 import com.poltomo.HibernateDemo.models.User;
 import com.poltomo.HibernateDemo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +37,10 @@ public class UserController {
     @GetMapping("/users/location/{id}/users")
     public List<User> getUsersByLocation(@PathVariable Integer id) {
         return userService.getUsersByLocation(id);
+    }
+
+    @PostMapping("/users/add")
+    public void addUser(@RequestBody User user){
+        userService.addUser(user);
     }
 }
