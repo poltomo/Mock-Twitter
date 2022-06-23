@@ -5,12 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
 @Table(name="users")
@@ -32,11 +27,11 @@ public class User {
 		this.locationid = locationid;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="locationid", insertable = false, updatable = false)
 	private Location location;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts;
 
 	public User() {}

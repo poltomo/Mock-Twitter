@@ -4,11 +4,7 @@ import com.poltomo.HibernateDemo.models.Location;
 import com.poltomo.HibernateDemo.models.User;
 import com.poltomo.HibernateDemo.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,5 +37,15 @@ public class LocationController {
     @PostMapping("/locations/add")
     public void addLocation(@RequestBody Location location){
         locationService.addLocation(location);
+    }
+
+    @PutMapping("/locations/{id}/update")
+    public void updateLocation(@RequestBody Location location){
+        locationService.updateLocation(location);
+    }
+
+    @DeleteMapping("/locations/{id}/delete")
+    public void deleteLocation(@PathVariable Integer id){
+        locationService.deleteLocation(id);
     }
 }

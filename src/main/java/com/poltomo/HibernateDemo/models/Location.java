@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Location {
@@ -15,7 +13,7 @@ public class Location {
 	private Integer id;
 	private String name;
 	
-	@OneToMany(mappedBy="location")
+	@OneToMany(mappedBy="location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> users;
 
 	public Location() {}

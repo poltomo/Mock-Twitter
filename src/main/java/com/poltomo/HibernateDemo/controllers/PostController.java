@@ -30,7 +30,18 @@ public class PostController {
     }
 
     @PostMapping("/posts/add")
-    public void addPost(@RequestBody Post post){
+    public String addPost(@RequestBody Post post){
         postService.addPost(post);
+        return "redirect:/posts"; // show updated data OR delete line,return void
+    }
+
+    @PutMapping("/posts/{id}/update")
+    public void updatePost(@RequestBody Post post){
+        postService.updatePost(post);
+    }
+
+    @DeleteMapping("/posts/{id}/delete")
+    public void deletePost(@PathVariable Integer id){
+        postService.deletePost(id);
     }
 }

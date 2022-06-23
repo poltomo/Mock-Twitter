@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Post {
@@ -28,7 +25,7 @@ public class Post {
 		this.userid = userid;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="userid", updatable = false, insertable = false)
 	private User user;
 	
